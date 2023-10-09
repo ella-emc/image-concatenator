@@ -13,36 +13,40 @@ import PIL
 def main():
     extensions = [".png", ".jpeg", ".jpg"]
 
-    if len(sys.argv) == 3:
-        img1, img2 = sys.argv[1:]
-        # check if file extension is image file
-        if img1.endswith(tuple(extensions)) and img2.endswith(tuple(extensions)):
-            img1_ext = os.path.splitext(img1)
-            img2_ext = os.path.splitext(img2)
-            if img1_ext[1] == img2_ext[1]:
-                # Check if image1 exists
-                try:
-                    upper = PIL.Image.open(img1)
-                except FileNotFoundError:
-                    sys.exit(f"{img1} not found")
-                
-                # Check if image2 exists
-                try:
-                    lower = PIL.Image.open(img2)
-                except FileNotFoundError:
-                    sys.exit(f"{img2} not found")
-                
-                # Do stuff
-
-
-            else:
-                sys.exit(f"{img1} extension does not match {img2} extension")
-        else:
-            sys.exit("File format is not supported")
-    elif len(sys.argv) < 3:
+    if len(sys.argv) < 3:
         sys.exit("Too few arguments")
-    else:
+
+    if len(sys.argv) > 3:
         sys.exit("Too many arguments")
+
+
+    # BEGIN EXECUTION
+    img1, img2 = sys.argv[1:]
+
+    # check if file extension is image file
+    if img1.endswith(tuple(extensions)) and img2.endswith(tuple(extensions)):
+        img1_ext = os.path.splitext(img1)
+        img2_ext = os.path.splitext(img2)
+        if img1_ext[1] == img2_ext[1]:
+            # Check if image1 exists
+            try:
+                upper = PIL.Image.open(img1)
+            except FileNotFoundError:
+                sys.exit(f"{img1} not found")
+            
+            # Check if image2 exists
+            try:
+                lower = PIL.Image.open(img2)
+            except FileNotFoundError:
+                sys.exit(f"{img2} not found")
+            
+            # Do stuff
+
+
+        else:
+            sys.exit(f"{img1} extension does not match {img2} extension")
+    else:
+        sys.exit("File format is not supported")
 
 
 def get_end_img1(image1):
